@@ -5,15 +5,15 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "visita_medicacion")
-public class VisitaMedicacion {
+public class VisitaMedicacionEntity {
     
     private Long visita_id;
     private Long medicacion_id;
 
-    public VisitaMedicacion() {
+    public VisitaMedicacionEntity() {
     }
 
-    public VisitaMedicacion(Long visita_id, Long medicacion_id) {
+    public VisitaMedicacionEntity(Long visita_id, Long medicacion_id) {
         this.visita_id = visita_id;
         this.medicacion_id = medicacion_id;
     }
