@@ -1,5 +1,9 @@
 package net.angular.doctormolero.repository;
 
-public class VisitaRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import net.angular.doctormolero.entity.VisitaEntity;
+
+public interface VisitaRepository extends JpaRepository<VisitaEntity, Long>{
     
 }
