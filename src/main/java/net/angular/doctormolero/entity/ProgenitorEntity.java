@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,30 +20,32 @@ public class ProgenitorEntity {
     private String sapellido;
     private boolean rol;
     /* CLAVE AJENA */
-    private Long paciente_id;
+    @ManyToOne
+    @JoinColumn(name = "paciente_id")
+    private PacienteEntity paciente;
 
     public ProgenitorEntity() {
     }
 
     public ProgenitorEntity(Long id, String dni, String nombre, String papellido, String sapellido, boolean rol,
-            Long paciente_id) {
+            PacienteEntity paciente) {
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
         this.papellido = papellido;
         this.sapellido = sapellido;
         this.rol = rol;
-        this.paciente_id = paciente_id;
+        this.paciente = paciente;
     }
 
     public ProgenitorEntity(String dni, String nombre, String papellido, String sapellido, boolean rol,
-            Long paciente_id) {
+            PacienteEntity paciente) {
         this.dni = dni;
         this.nombre = nombre;
         this.papellido = papellido;
         this.sapellido = sapellido;
         this.rol = rol;
-        this.paciente_id = paciente_id;
+        this.paciente = paciente;
     }
 
     public ProgenitorEntity(String dni, String nombre, String papellido, String sapellido, boolean rol) {
@@ -100,13 +104,12 @@ public class ProgenitorEntity {
         this.rol = rol;
     }
 
-    public Long getPaciente_id() {
-        return paciente_id;
+    public PacienteEntity getPaciente() {
+        return paciente;
     }
 
-    public void setPaciente_id(Long paciente_id) {
-        this.paciente_id = paciente_id;
+    public void setPaciente(PacienteEntity paciente) {
+        this.paciente = paciente;
     }
-
     
 }

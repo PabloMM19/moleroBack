@@ -3,6 +3,8 @@ package net.angular.doctormolero.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,21 +14,27 @@ public class VisitaMedicacionEntity {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
-    private Long visita_id;
-    private Long medicacion_id;
+    /* CLAVE AJENA */
+    @ManyToOne
+    @JoinColumn(name = "visita_id")
+    private VisitaEntity visita;
+    /* CLAVE AJENA */
+    @ManyToOne
+    @JoinColumn(name = "medicacion_id")
+    private MedicacionEntity medicacion;
 
     public VisitaMedicacionEntity() {
     }
 
-    public VisitaMedicacionEntity(Long id, Long visita_id, Long medicacion_id) {
+    public VisitaMedicacionEntity(Long id, VisitaEntity visita, MedicacionEntity medicacion) {
         this.id = id;
-        this.visita_id = visita_id;
-        this.medicacion_id = medicacion_id;
+        this.visita = visita;
+        this.medicacion = medicacion;
     }
 
-    public VisitaMedicacionEntity(Long visita_id, Long medicacion_id) {
-        this.visita_id = visita_id;
-        this.medicacion_id = medicacion_id;
+    public VisitaMedicacionEntity(VisitaEntity visita, MedicacionEntity medicacion) {
+        this.visita = visita;
+        this.medicacion = medicacion;
     }
 
     public Long getId() {
@@ -37,20 +45,20 @@ public class VisitaMedicacionEntity {
         this.id = id;
     }
 
-    public Long getVisita_id() {
-        return visita_id;
+    public VisitaEntity getVisita() {
+        return visita;
     }
 
-    public void setVisita_id(Long visita_id) {
-        this.visita_id = visita_id;
+    public MedicacionEntity getMedicacion() {
+        return medicacion;
     }
 
-    public Long getMedicacion_id() {
-        return medicacion_id;
+    public void setMedicacion(MedicacionEntity medicacion) {
+        this.medicacion = medicacion;
     }
 
-    public void setMedicacion_id(Long medicacion_id) {
-        this.medicacion_id = medicacion_id;
+    public void setVisita(VisitaEntity visita) {
+        this.visita = visita;
     }
 
     

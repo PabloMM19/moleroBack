@@ -3,6 +3,8 @@ package net.angular.doctormolero.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,21 +14,28 @@ public class VisitaPruebaEntity {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
-    private Long visita_id;
-    private Long prueba_id;
+    /* CLAVE AJENA */
+    @ManyToOne
+    @JoinColumn(name = "visita_id")
+    private VisitaEntity visita;
+    
+    /* CLAVE AJENA */
+    @ManyToOne
+    @JoinColumn(name = "prueba_id")
+    private PruebaEntity prueba;
 
     public VisitaPruebaEntity() {
     }
 
-    public VisitaPruebaEntity(Long id, Long visita_id, Long prueba_id) {
+    public VisitaPruebaEntity(Long id, VisitaEntity visita, PruebaEntity prueba) {
         this.id = id;
-        this.visita_id = visita_id;
-        this.prueba_id = prueba_id;
+        this.visita = visita;
+        this.prueba = prueba;
     }
 
-    public VisitaPruebaEntity(Long visita_id, Long prueba_id) {
-        this.visita_id = visita_id;
-        this.prueba_id = prueba_id;
+    public VisitaPruebaEntity(VisitaEntity visita, PruebaEntity prueba) {
+        this.visita = visita;
+        this.prueba = prueba;
     }
 
     public Long getId() {
@@ -37,20 +46,20 @@ public class VisitaPruebaEntity {
         this.id = id;
     }
 
-    public Long getVisita_id() {
-        return visita_id;
+    public VisitaEntity getVisita() {
+        return visita;
     }
 
-    public void setVisita_id(Long visita_id) {
-        this.visita_id = visita_id;
+    public void setVisita(VisitaEntity visita) {
+        this.visita = visita;
     }
 
-    public Long getPrueba_id() {
-        return prueba_id;
+    public PruebaEntity getPrueba() {
+        return prueba;
     }
 
-    public void setPrueba_id(Long prueba_id) {
-        this.prueba_id = prueba_id;
+    public void setPrueba(PruebaEntity prueba) {
+        this.prueba = prueba;
     }
 
     

@@ -1,9 +1,12 @@
 package net.angular.doctormolero.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,6 +18,11 @@ public class SeguroMedicoEntity {
     private Long id;
     private String companyia;
     private String descripcion;
+
+    /* CLAVE AJENA */
+    @OneToMany(mappedBy = "seguroMedico", fetch = jakarta.persistence.FetchType.LAZY)
+    private List<PacienteEntity> pacientes;
+
 
     public SeguroMedicoEntity() {
     }
@@ -54,5 +62,8 @@ public class SeguroMedicoEntity {
         this.descripcion = descripcion;
     }
 
-    
+    public int getPacientes() {
+        return pacientes.size();
+    }
+
 }

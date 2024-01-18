@@ -1,9 +1,14 @@
 package net.angular.doctormolero.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,26 +21,36 @@ public class VisitaEntity {
     private String fecha;
     private String comentario;
     /* CLAVE AJENA */
-    private Long paciente_id;
+    @ManyToOne
+    @JoinColumn(name = "paciente_id")
+    private PacienteEntity paciente;
     /* CLAVE AJENA */
-    private Long diagnostico_id;
+    @ManyToOne
+    @JoinColumn(name = "diagnostico_id")
+    private DiagnosticoEntity diagnostico;
+
+    @OneToMany(mappedBy = "visita", fetch = jakarta.persistence.FetchType.LAZY)
+    private List<VisitaPruebaEntity> visitaPruebas;
+
+    @OneToMany(mappedBy = "visita", fetch = jakarta.persistence.FetchType.LAZY)
+    private List<VisitaMedicacionEntity> visitaMedicaciones;
 
     public VisitaEntity() {
     }
 
-    public VisitaEntity(Long id, String fecha, String comentario, Long paciente_id, Long diagnostico_id) {
+    public VisitaEntity(Long id, String fecha, String comentario, PacienteEntity paciente, DiagnosticoEntity diagnostico) {
         this.id = id;
         this.fecha = fecha;
         this.comentario = comentario;
-        this.paciente_id = paciente_id;
-        this.diagnostico_id = diagnostico_id;
+        this.paciente = paciente;
+        this.diagnostico = diagnostico;
     }
 
-    public VisitaEntity(String fecha, String comentario, Long paciente_id, Long diagnostico_id) {
+    public VisitaEntity(String fecha, String comentario, PacienteEntity paciente, DiagnosticoEntity diagnostico) {
         this.fecha = fecha;
         this.comentario = comentario;
-        this.paciente_id = paciente_id;
-        this.diagnostico_id = diagnostico_id;
+        this.paciente = paciente;
+        this.diagnostico = diagnostico;
     }
 
     public Long getId() {
@@ -62,21 +77,28 @@ public class VisitaEntity {
         this.comentario = comentario;
     }
 
-    public Long getPaciente_id() {
-        return paciente_id;
+    public PacienteEntity getPaciente() {
+        return paciente;
     }
 
-    public void setPaciente_id(Long paciente_id) {
-        this.paciente_id = paciente_id;
+    public void setPaciente(PacienteEntity paciente) {
+        this.paciente = paciente;
     }
 
-    public Long getDiagnostico_id() {
-        return diagnostico_id;
+    public DiagnosticoEntity getDiagnostico() {
+        return diagnostico;
     }
 
-    public void setDiagnostico_id(Long diagnostico_id) {
-        this.diagnostico_id = diagnostico_id;
+    public void setDiagnostico(DiagnosticoEntity diagnostico) {
+        this.diagnostico = diagnostico;
     }
 
+    public int getVisitaPruebas() {
+        return visitaPruebas.size();
+    }
+
+    public int getVisitaMedicaciones() {
+        return visitaMedicaciones.size();
+    }
     
 }

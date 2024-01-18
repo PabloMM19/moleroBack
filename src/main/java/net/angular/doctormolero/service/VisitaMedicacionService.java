@@ -5,6 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import net.angular.doctormolero.entity.DiagnosticoEntity;
+import net.angular.doctormolero.entity.MedicacionEntity;
+import net.angular.doctormolero.entity.MedidaEntity;
+import net.angular.doctormolero.entity.PacienteEntity;
+import net.angular.doctormolero.entity.VisitaEntity;
 import net.angular.doctormolero.entity.VisitaMedicacionEntity;
 import net.angular.doctormolero.exception.ResourceNotFoundException;
 import net.angular.doctormolero.repository.VisitaMedicacionRepository;
@@ -19,7 +24,7 @@ public class VisitaMedicacionService {
     }
 
     public Long create(VisitaMedicacionEntity oVisitaMedicacion) {
-        return oVisitaMedicacionRepository.save(oVisitaMedicacion).getMedicacion_id();
+        return oVisitaMedicacionRepository.save(oVisitaMedicacion).getId();
     }
 
     public VisitaMedicacionEntity update(VisitaMedicacionEntity oVisitaMedicacion) {
@@ -38,7 +43,8 @@ public class VisitaMedicacionService {
     public Long populate(Integer amount) {
         for (int i = 0; i < amount; i++) {
             VisitaMedicacionEntity oVisitaMedicacion = new VisitaMedicacionEntity();
-            oVisitaMedicacion.setMedicacion_id(Long.valueOf(1));
+            oVisitaMedicacion.setMedicacion(new MedicacionEntity("Medicacion " + i, "Descripcion " + i, new MedidaEntity("Kilogramo")));
+            oVisitaMedicacion.setVisita(new VisitaEntity("2024-02-09", "Comentario " + i, new PacienteEntity("PRUEBA", "2002-02-09", "pablo", "molero", "marin", "foto1"), new DiagnosticoEntity("Diagnostico " + i, "Descripcion " + i)));
             oVisitaMedicacionRepository.save(oVisitaMedicacion);
         }
         return Long.valueOf(amount);

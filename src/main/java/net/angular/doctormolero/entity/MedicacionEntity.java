@@ -1,9 +1,14 @@
 package net.angular.doctormolero.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,7 +21,12 @@ public class MedicacionEntity {
     String nombre;
     String descripcion;
     /* CLAVE AJENA */
-    Long medida_id;
+    @ManyToOne
+    @JoinColumn(name = "medida_id")
+    private MedidaEntity medida;
+
+    @OneToMany(mappedBy = "medicacion", fetch = jakarta.persistence.FetchType.LAZY)
+    private List<VisitaMedicacionEntity> medicacionVisitas;
 
     public MedicacionEntity() {
     }
@@ -32,17 +42,17 @@ public class MedicacionEntity {
         this.descripcion = descripcion;
     }
 
-    public MedicacionEntity(Long id, String nombre, String descripcion, Long medida_id) {
+    public MedicacionEntity(Long id, String nombre, String descripcion, MedidaEntity medida) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.medida_id = medida_id;
+        this.medida = medida;
     }
 
-    public MedicacionEntity(String nombre, String descripcion, Long medida_id) {
+    public MedicacionEntity(String nombre, String descripcion, MedidaEntity medida) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.medida_id = medida_id;
+        this.medida = medida;
     }
 
     public Long getId() {
@@ -69,13 +79,16 @@ public class MedicacionEntity {
         this.descripcion = descripcion;
     }
 
-    public Long getMedida_id() {
-        return medida_id;
+    public MedidaEntity getMedida() {
+        return medida;
     }
 
-    public void setMedida_id(Long medida_id) {
-        this.medida_id = medida_id;
+    public void setMedida(MedidaEntity medida) {
+        this.medida = medida;
     }
 
-    
+    public int getMedicacionVisitas() {
+        return medicacionVisitas.size();
+    }
+
 }

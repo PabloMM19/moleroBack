@@ -1,9 +1,12 @@
 package net.angular.doctormolero.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,6 +16,9 @@ public class MedidaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
+
+    @OneToMany(mappedBy = "medida", fetch = jakarta.persistence.FetchType.LAZY)
+    private List<MedicacionEntity> medicaciones;
 
     public MedidaEntity() {
     }
@@ -40,6 +46,10 @@ public class MedidaEntity {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public int getMedicaciones() {
+        return medicaciones.size();
     }
 
     

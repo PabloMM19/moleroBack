@@ -1,9 +1,12 @@
 package net.angular.doctormolero.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,6 +18,9 @@ public class DiagnosticoEntity {
     private Long id;
     String nombre;
     String descripcion;
+
+    @OneToMany(mappedBy = "diagnostico", fetch = jakarta.persistence.FetchType.LAZY)
+    private List<VisitaEntity> visitas;
 
     public DiagnosticoEntity() {
     }
@@ -54,5 +60,8 @@ public class DiagnosticoEntity {
         this.descripcion = descripcion;
     }
 
+    public int getVisitas() {
+        return visitas.size();
+    }
     
 }

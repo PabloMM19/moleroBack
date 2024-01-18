@@ -1,9 +1,14 @@
 package net.angular.doctormolero.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,44 +22,60 @@ public class PacienteEntity {
     private String papellido;
     private String sapellido;
     private String foto;
+    private String fnacimiento;
     /* CLAVE AJENA */
-    private Long seguromedico_id;
+    @ManyToOne
+    @JoinColumn(name = "seguromedico_id")
+    private SeguroMedicoEntity seguroMedico;
+
+    @OneToMany(mappedBy = "paciente", fetch = jakarta.persistence.FetchType.LAZY)
+    private List<ProgenitorEntity> progenitores;
+
+    @OneToMany(mappedBy = "paciente", fetch = jakarta.persistence.FetchType.LAZY)
+    private List<VisitaEntity> visitas;
+
+
+
 
     public PacienteEntity() {
     }
 
-    public PacienteEntity(Long id, String codigo, String nombre, String papellido, String sapellido, String foto,
-            Long seguromedico_id) {
+    public PacienteEntity(Long id, String codigo, String fnacimiento, String nombre, String papellido, String sapellido, String foto,
+            SeguroMedicoEntity seguroMedico) {
         this.id = id;
         this.codigo = codigo;
+        this.fnacimiento = fnacimiento;
         this.nombre = nombre;
         this.papellido = papellido;
         this.sapellido = sapellido;
         this.foto = foto;
-        this.seguromedico_id = seguromedico_id;
+        this.seguroMedico = seguroMedico;
     }
 
-    public PacienteEntity(String codigo, String nombre, String papellido, String sapellido, String foto,
-            Long seguromedico_id) {
+    public PacienteEntity(String codigo, String fnacimiento, String nombre, String papellido, String sapellido, String foto,
+            SeguroMedicoEntity seguroMedico) {
         this.codigo = codigo;
+        this.fnacimiento = fnacimiento;
         this.nombre = nombre;
         this.papellido = papellido;
         this.sapellido = sapellido;
         this.foto = foto;
-        this.seguromedico_id = seguromedico_id;
+        this.seguroMedico = seguroMedico;
     }
 
-    public PacienteEntity(String codigo, String nombre, String papellido, String sapellido, String foto) {
+    public PacienteEntity(String codigo, String fnacimiento, String nombre, String papellido, String sapellido, String foto) {
         this.codigo = codigo;
+        this.fnacimiento = fnacimiento;
         this.nombre = nombre;
         this.papellido = papellido;
         this.sapellido = sapellido;
         this.foto = foto;
     }
 
-    public PacienteEntity(Long id, String codigo, String nombre, String papellido, String sapellido, String foto) {
+    public PacienteEntity(Long id, String codigo, String fnacimiento, String nombre, String papellido, String sapellido, String foto) {
         this.id = id;
         this.codigo = codigo;
+        this.fnacimiento = fnacimiento;
         this.nombre = nombre;
         this.papellido = papellido;
         this.sapellido = sapellido;
@@ -75,6 +96,14 @@ public class PacienteEntity {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    public String getFnacimiento() {
+        return fnacimiento;
+    }
+
+    public void setFnacimiento(String fnacimiento) {
+        this.fnacimiento = fnacimiento;
     }
 
     public String getNombre() {
@@ -109,13 +138,20 @@ public class PacienteEntity {
         this.foto = foto;
     }
 
-    public Long getSeguromedico_id() {
-        return seguromedico_id;
+    public SeguroMedicoEntity getSeguroMedico() {
+        return seguroMedico;
     }
 
-    public void setSeguromedico_id(Long seguromedico_id) {
-        this.seguromedico_id = seguromedico_id;
+    public void setSeguroMedico(SeguroMedicoEntity seguroMedico) {
+        this.seguroMedico = seguroMedico;
     }
 
+    public int getProgenitores() {
+        return this.progenitores != null ? this.progenitores.size() : 0;
+    }
+
+    public int getVisitas() {
+        return this.visitas != null ? this.visitas.size() : 0;
+    }
     
 }
