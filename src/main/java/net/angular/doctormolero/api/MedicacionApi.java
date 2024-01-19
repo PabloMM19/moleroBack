@@ -34,7 +34,7 @@ public class MedicacionApi {
         return ResponseEntity.ok(oMedicacionService.create(oMedicacionEntity));
     }
 
-    @PutMapping("")
+    @PutMapping("/{id}")
     public ResponseEntity<MedicacionEntity> update(@RequestBody MedicacionEntity oMedicacionEntity) {
         return ResponseEntity.ok(oMedicacionService.update(oMedicacionEntity));
     }

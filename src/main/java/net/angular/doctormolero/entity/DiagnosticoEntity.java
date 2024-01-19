@@ -61,7 +61,7 @@ public class DiagnosticoEntity {
     }
 
     public int getVisitas() {
-        return visitas.size();
+        return this.visitas != null ? this.visitas.size() : 0;
     }
     
 }

@@ -34,7 +34,7 @@ public class DiagnosticoApi {
         return ResponseEntity.ok(oDiagnosticoService.create(oDiagnosticoEntity));
     }
 
-    @PutMapping("")
+    @PutMapping("/{id}")
     public ResponseEntity<DiagnosticoEntity> update(@RequestBody DiagnosticoEntity oDiagnosticoEntity) {
         return ResponseEntity.ok(oDiagnosticoService.update(oDiagnosticoEntity));
     }
