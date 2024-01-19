@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import net.angular.doctormolero.entity.PruebaEntity;
 import net.angular.doctormolero.service.PruebaService;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
+//@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/prueba")
 public class PruebaApi {

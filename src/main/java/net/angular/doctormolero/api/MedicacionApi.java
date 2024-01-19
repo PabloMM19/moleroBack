@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import net.angular.doctormolero.entity.MedicacionEntity;
 import net.angular.doctormolero.service.MedicacionService;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
+//@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/medicacion")
 public class MedicacionApi {

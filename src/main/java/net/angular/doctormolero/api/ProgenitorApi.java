@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import net.angular.doctormolero.entity.ProgenitorEntity;
 import net.angular.doctormolero.service.ProgenitorService;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
+//@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/progenitor")
 public class ProgenitorApi {

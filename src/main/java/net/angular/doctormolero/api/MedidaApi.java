@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import net.angular.doctormolero.entity.MedidaEntity;
 import net.angular.doctormolero.service.MedidaService;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
+//@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/medida")
 public class MedidaApi {
