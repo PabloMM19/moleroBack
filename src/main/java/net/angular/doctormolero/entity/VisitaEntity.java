@@ -94,11 +94,11 @@ public class VisitaEntity {
     }
 
     public int getVisitaPruebas() {
-        return visitaPruebas.size();
+        return this.visitaPruebas != null ? this.visitaPruebas.size() : 0;
     }
 
     public int getVisitaMedicaciones() {
-        return visitaMedicaciones.size();
+        return this.visitaMedicaciones != null ? this.visitaMedicaciones.size() : 0;
     }
     
 }

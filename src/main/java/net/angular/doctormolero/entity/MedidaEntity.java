@@ -49,7 +49,7 @@ public class MedidaEntity {
     }
 
     public int getMedicaciones() {
-        return medicaciones.size();
+        return this.medicaciones != null ? this.medicaciones.size() : 0;
     }
 
     

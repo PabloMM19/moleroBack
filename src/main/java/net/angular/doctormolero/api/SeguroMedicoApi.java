@@ -34,7 +34,7 @@ public class SeguroMedicoApi {
         return ResponseEntity.ok(oSeguroMedicoService.create(oSeguroMedicoEntity));
     }
 
-    @PutMapping("")
+    @PutMapping("/{id}")
     public ResponseEntity<SeguroMedicoEntity> update(@RequestBody SeguroMedicoEntity oSeguroMedicoEntity) {
         return ResponseEntity.ok(oSeguroMedicoService.update(oSeguroMedicoEntity));
     }

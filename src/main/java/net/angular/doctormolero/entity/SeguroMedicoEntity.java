@@ -63,7 +63,7 @@ public class SeguroMedicoEntity {
     }
 
     public int getPacientes() {
-        return pacientes.size();
+        return this.pacientes != null ? this.pacientes.size() : 0;
     }
 
 }

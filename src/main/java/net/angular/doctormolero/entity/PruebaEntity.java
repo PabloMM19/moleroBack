@@ -60,7 +60,7 @@ public class PruebaEntity {
     }
 
     public int getPruebaVisitas() {
-        return pruebaVisitas.size();
+        return this.pruebaVisitas != null ? this.pruebaVisitas.size() : 0;
     }
     
 }

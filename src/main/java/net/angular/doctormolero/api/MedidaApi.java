@@ -34,7 +34,7 @@ public class MedidaApi {
         return ResponseEntity.ok(oMedidaService.create(oMedidaEntity));
     }
 
-    @PutMapping("")
+    @PutMapping("/{id}")
     public ResponseEntity<MedidaEntity> update(@RequestBody MedidaEntity oMedidaEntity) {
         return ResponseEntity.ok(oMedidaService.update(oMedidaEntity));
     }

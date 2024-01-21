@@ -34,7 +34,7 @@ public class VisitaPruebaApi {
         return ResponseEntity.ok(oVisitaPruebaService.create(oVisitaPruebaEntity));
     }
 
-    @PutMapping("")
+    @PutMapping("/{id}")
     public ResponseEntity<VisitaPruebaEntity> update(@RequestBody VisitaPruebaEntity oVisitaPruebaEntity) {
         return ResponseEntity.ok(oVisitaPruebaService.update(oVisitaPruebaEntity));
     }

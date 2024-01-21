@@ -34,7 +34,7 @@ public class VisitaApi {
         return ResponseEntity.ok(oVisitaService.create(oVisitaEntity));
     }
 
-    @PutMapping("")
+    @PutMapping("/{id}")
     public ResponseEntity<VisitaEntity> update(@RequestBody VisitaEntity oVisitaEntity) {
         return ResponseEntity.ok(oVisitaService.update(oVisitaEntity));
     }

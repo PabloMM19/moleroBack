@@ -34,7 +34,7 @@ public class ProgenitorApi {
         return ResponseEntity.ok(oProgenitorService.create(oProgenitorEntity));
     }
 
-    @PutMapping("")
+    @PutMapping("/{id}")
     public ResponseEntity<ProgenitorEntity> update(@RequestBody ProgenitorEntity oProgenitorEntity) {
         return ResponseEntity.ok(oProgenitorService.update(oProgenitorEntity));
     }
