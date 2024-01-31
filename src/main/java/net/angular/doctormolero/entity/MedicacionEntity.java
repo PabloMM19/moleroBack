@@ -88,7 +88,7 @@ public class MedicacionEntity {
     }
 
     public int getMedicacionVisitas() {
-        return medicacionVisitas.size();
+        return this.medicacionVisitas != null ? this.medicacionVisitas.size() : 0;
     }
 
 }
