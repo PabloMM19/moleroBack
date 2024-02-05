@@ -1,10 +1,14 @@
 package net.angular.doctormolero.service;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import net.angular.doctormolero.entity.PacienteEntity;
 import net.angular.doctormolero.entity.ProgenitorEntity;
 import net.angular.doctormolero.exception.ResourceNotFoundException;
 import net.angular.doctormolero.repository.ProgenitorRepository;
@@ -13,6 +17,12 @@ import net.angular.doctormolero.repository.ProgenitorRepository;
 public class ProgenitorService {
     @Autowired
     ProgenitorRepository oProgenitorRepository;
+
+public List<PacienteEntity> getPacientesByProgenitorId(Long progenitorId) {
+        ProgenitorEntity progenitor = oProgenitorRepository.findById(progenitorId)
+                .orElseThrow(() -> new ResourceNotFoundException("Progenitor not found"));
+        return Collections.singletonList(progenitor.getPaciente());
+    }
 
     public ProgenitorEntity get(Long id) {
         return oProgenitorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Reply not found"));

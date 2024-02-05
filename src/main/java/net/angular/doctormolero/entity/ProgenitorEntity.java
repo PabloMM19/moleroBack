@@ -1,5 +1,7 @@
 package net.angular.doctormolero.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,8 +23,10 @@ public class ProgenitorEntity {
     private boolean rol;
     /* CLAVE AJENA */
     @ManyToOne
-    @JoinColumn(name = "paciente_id")
-    private PacienteEntity paciente;
+@JoinColumn(name = "paciente_id")
+@JsonBackReference
+private PacienteEntity paciente;
+
 
     public ProgenitorEntity() {
     }

@@ -1,6 +1,9 @@
 package net.angular.doctormolero.api;
 
 import org.springframework.data.domain.Page;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.angular.doctormolero.entity.PacienteEntity;
 import net.angular.doctormolero.entity.ProgenitorEntity;
 import net.angular.doctormolero.service.ProgenitorService;
 
@@ -23,6 +27,11 @@ import net.angular.doctormolero.service.ProgenitorService;
 public class ProgenitorApi {
     @Autowired
     ProgenitorService oProgenitorService;
+
+@GetMapping("/{progenitorId}/pacientes")
+public ResponseEntity<List<PacienteEntity>> getPacientesByProgenitorId(@PathVariable("progenitorId") Long progenitorId) {
+    return ResponseEntity.ok(oProgenitorService.getPacientesByProgenitorId(progenitorId));
+}
 
     @GetMapping("/{id}")
     public ResponseEntity<ProgenitorEntity> get(@PathVariable("id") Long id){

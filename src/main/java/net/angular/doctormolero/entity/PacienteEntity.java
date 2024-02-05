@@ -2,6 +2,8 @@ package net.angular.doctormolero.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,7 +31,9 @@ public class PacienteEntity {
     private SeguroMedicoEntity seguroMedico;
 
     @OneToMany(mappedBy = "paciente", fetch = jakarta.persistence.FetchType.LAZY)
-    private List<ProgenitorEntity> progenitores;
+@JsonManagedReference
+private List<ProgenitorEntity> progenitores;
+
 
     @OneToMany(mappedBy = "paciente", fetch = jakarta.persistence.FetchType.LAZY)
     private List<VisitaEntity> visitas;
@@ -146,9 +150,9 @@ public class PacienteEntity {
         this.seguroMedico = seguroMedico;
     }
 
-    public int getProgenitores() {
-        return this.progenitores != null ? this.progenitores.size() : 0;
-    }
+    public List<ProgenitorEntity> getProgenitores() {
+    return this.progenitores;
+}
 
     public int getVisitas() {
         return this.visitas != null ? this.visitas.size() : 0;
