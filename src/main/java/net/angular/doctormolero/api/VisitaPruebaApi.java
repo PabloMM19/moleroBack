@@ -19,7 +19,7 @@ import net.angular.doctormolero.service.VisitaPruebaService;
 
 //@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/vistaprueba")
+@RequestMapping("/visitaprueba")
 public class VisitaPruebaApi {
     @Autowired
     VisitaPruebaService oVisitaPruebaService;
