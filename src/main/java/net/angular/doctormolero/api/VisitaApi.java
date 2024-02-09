@@ -1,6 +1,9 @@
 package net.angular.doctormolero.api;
 
 import org.springframework.data.domain.Page;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -52,5 +55,11 @@ public class VisitaApi {
     @PostMapping("/populate/{amount}")
     public ResponseEntity<Long> populate(@PathVariable("amount") Integer amount) {
         return ResponseEntity.ok(oVisitaService.populate(amount));
+    }
+
+    @GetMapping("/paciente/{pacienteId}")
+    public ResponseEntity<List<VisitaEntity>> getVisitasByPacienteId(@PathVariable("pacienteId") Long pacienteId) {
+        List<VisitaEntity> visitas = oVisitaService.getVisitasByPacienteId(pacienteId);
+        return ResponseEntity.ok(visitas);
     }
 }
