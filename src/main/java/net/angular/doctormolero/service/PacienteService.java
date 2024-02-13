@@ -18,19 +18,31 @@ public class PacienteService {
     @Autowired
     PacienteRepository oPacienteRepository;
 
-public Page<PacienteEntity> searchByName(String query, Pageable pageable) {
-    return oPacienteRepository.findByNombreContainingIgnoreCase(query, pageable);
-}
+    @Autowired
+    SessionService oSessionService;
 
-public Set<ProgenitorEntity> getProgenitoresByPacienteId(Long pacienteId) {
+    public Page<PacienteEntity> searchByName(String query, Pageable pageable) {
+        oSessionService.isLogged();
+        return oPacienteRepository.findByNombreContainingIgnoreCase(query, pageable);
+    }
+
+    public Set<ProgenitorEntity> getProgenitoresByPacienteId(Long pacienteId) {
+        oSessionService.isLogged();
         PacienteEntity paciente = oPacienteRepository.findById(pacienteId)
                 .orElseThrow(() -> new ResourceNotFoundException("Paciente not found"));
         return new HashSet<>(paciente.getProgenitores());
     }
 
-
     public PacienteEntity get(Long id) {
-        return oPacienteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Reply not found"));
+        if (!oSessionService.isLogged()) {
+            // Si el usuario no está autenticado, lanzar una excepción o tomar alguna acción
+            // adecuada.
+            throw new RuntimeException("El usuario no está autenticado");
+        } else {
+
+            return oPacienteRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Paciente no encontrado"));
+        }
     }
 
     public Long create(PacienteEntity oPacienteEntity) {
@@ -47,7 +59,12 @@ public Set<ProgenitorEntity> getProgenitoresByPacienteId(Long pacienteId) {
     }
 
     public Page<PacienteEntity> getPage(Pageable oPageable) {
-        return oPacienteRepository.findAll(oPageable);
+        if (oSessionService.isLogged()) {
+            return oPacienteRepository.findAll(oPageable);
+            
+        } else {
+            throw new RuntimeException("El usuario no está autenticado");
+        }
     }
 
     public Long populate(Integer amount) {
