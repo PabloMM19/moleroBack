@@ -1,5 +1,7 @@
 package net.angular.doctormolero.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,7 +10,6 @@ import org.springframework.stereotype.Service;
 import net.angular.doctormolero.entity.DiagnosticoEntity;
 import net.angular.doctormolero.entity.PacienteEntity;
 import net.angular.doctormolero.entity.PruebaEntity;
-import net.angular.doctormolero.entity.SeguroMedicoEntity;
 import net.angular.doctormolero.entity.VisitaEntity;
 import net.angular.doctormolero.entity.VisitaPruebaEntity;
 import net.angular.doctormolero.exception.ResourceNotFoundException;
@@ -48,5 +49,9 @@ public class VisitaPruebaService {
             oVisitaPruebaRepository.save(oVisitaPrueba);
         }
         return Long.valueOf(amount);
+    }
+
+    public List<VisitaPruebaEntity> getPruebasByVisitaId(Long visitaId) {
+        return oVisitaPruebaRepository.findByVisitaId(visitaId);
     }
 }

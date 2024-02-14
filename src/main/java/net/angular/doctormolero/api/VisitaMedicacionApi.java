@@ -53,4 +53,10 @@ public class VisitaMedicacionApi {
     public ResponseEntity<Long> populate(@PathVariable("amount") Integer amount) {
         return ResponseEntity.ok(oVisitaMedicacionService.populate(amount));
     }
+
+    @GetMapping("/visita/{visitaId}")
+    public ResponseEntity<Page<VisitaMedicacionEntity>> getByVisitaId(@PathVariable("visitaId") Long visitaId, Pageable pageable) {
+    return ResponseEntity.ok(oVisitaMedicacionService.getByVisitaId(visitaId, pageable));
+}
+
 }

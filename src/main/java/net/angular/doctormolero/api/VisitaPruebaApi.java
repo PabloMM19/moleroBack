@@ -1,6 +1,9 @@
 package net.angular.doctormolero.api;
 
 import org.springframework.data.domain.Page;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -53,4 +56,11 @@ public class VisitaPruebaApi {
     public ResponseEntity<Long> populate(@PathVariable("amount") Integer amount) {
         return ResponseEntity.ok(oVisitaPruebaService.populate(amount));
     }
+
+    @GetMapping("/visita/{visitaId}")
+public ResponseEntity<List<VisitaPruebaEntity>> getPruebasByVisitaId(@PathVariable("visitaId") Long visitaId) {
+    List<VisitaPruebaEntity> pruebas = oVisitaPruebaService.getPruebasByVisitaId(visitaId);
+    return ResponseEntity.ok(pruebas);
+}
+
 }

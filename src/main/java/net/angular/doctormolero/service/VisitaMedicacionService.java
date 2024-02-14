@@ -49,4 +49,9 @@ public class VisitaMedicacionService {
         }
         return Long.valueOf(amount);
     }
+
+    /* get by visitaid */
+    public Page<VisitaMedicacionEntity> getByVisitaId(Long visitaId, Pageable pageable) {
+        return oVisitaMedicacionRepository.findByVisitaId(visitaId, pageable);
+    }
 }
