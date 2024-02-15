@@ -20,28 +20,37 @@ public class VisitaPruebaService {
     @Autowired
     VisitaPruebaRepository oVisitaPruebaRepository;
 
+    @Autowired
+    SessionService oSessionService;
+
     public VisitaPruebaEntity get(Long id) {
+        oSessionService.isLogged();
         return oVisitaPruebaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Reply not found"));
     }
 
     public Long create(VisitaPruebaEntity oVisitaPrueba) {
+        oSessionService.isLogged();
         return oVisitaPruebaRepository.save(oVisitaPrueba).getId();
     }
 
     public VisitaPruebaEntity update(VisitaPruebaEntity oVisitaPrueba) {
+        oSessionService.isLogged();
         return oVisitaPruebaRepository.save(oVisitaPrueba);
     }
 
     public Long delete(Long id) {
+        oSessionService.isLogged();
         oVisitaPruebaRepository.deleteById(id);
         return id;
     }
 
     public Page<VisitaPruebaEntity> getPage(Pageable oPageable) {
+        oSessionService.isLogged();
         return oVisitaPruebaRepository.findAll(oPageable);
     }
 
     public Long populate(Integer amount) {
+        oSessionService.isLogged();
         for (int i = 0; i < amount; i++) {
             VisitaPruebaEntity oVisitaPrueba = new VisitaPruebaEntity();
             oVisitaPrueba.setPrueba(new PruebaEntity("Prueba " + i, "Descripcion " + i));
@@ -52,6 +61,7 @@ public class VisitaPruebaService {
     }
 
     public List<VisitaPruebaEntity> getPruebasByVisitaId(Long visitaId) {
+        oSessionService.isLogged();
         return oVisitaPruebaRepository.findByVisitaId(visitaId);
     }
 }

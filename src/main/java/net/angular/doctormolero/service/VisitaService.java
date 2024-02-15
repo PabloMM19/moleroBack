@@ -15,29 +15,38 @@ import net.angular.doctormolero.repository.VisitaRepository;
 public class VisitaService {
     @Autowired
     VisitaRepository oVisitaRepository;
+
+    @Autowired
+    SessionService oSessionService;
     
     public VisitaEntity get(Long id) {
+        oSessionService.isLogged();
         return oVisitaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Reply not found"));
     }
 
     public Long create(VisitaEntity oVisitaEntity) {
+        oSessionService.isLogged();
         return oVisitaRepository.save(oVisitaEntity).getId();
     }
 
     public VisitaEntity update(VisitaEntity oVisitaEntity) {
+        oSessionService.isLogged();
         return oVisitaRepository.save(oVisitaEntity);
     }
 
     public Long delete(Long id) {
+        oSessionService.isLogged();
         oVisitaRepository.deleteById(id);
         return id;
     }
 
     public Page<VisitaEntity> getPage(Pageable oPageable) {
+        oSessionService.isLogged();
         return oVisitaRepository.findAll(oPageable);
     }
 
     public Long populate(Integer amount) {
+        oSessionService.isLogged();
         for (int i = 0; i < amount; i++) {
             VisitaEntity oVisitaEntity = new VisitaEntity();
             oVisitaEntity.setComentario("Visita " + i);
@@ -47,6 +56,7 @@ public class VisitaService {
     }
 
     public List<VisitaEntity> getVisitasByPacienteId(Long pacienteId) {
+        oSessionService.isLogged();
         return oVisitaRepository.findByPacienteId(pacienteId);
     }
 }

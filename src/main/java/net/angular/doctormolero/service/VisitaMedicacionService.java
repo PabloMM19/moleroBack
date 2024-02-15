@@ -19,28 +19,37 @@ public class VisitaMedicacionService {
     @Autowired
     VisitaMedicacionRepository oVisitaMedicacionRepository;
 
+    @Autowired
+    SessionService oSessionService;
+
     public VisitaMedicacionEntity get(Long id) {
+        oSessionService.isLogged();
         return oVisitaMedicacionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Reply not found"));
     }
 
     public Long create(VisitaMedicacionEntity oVisitaMedicacion) {
+        oSessionService.isLogged();
         return oVisitaMedicacionRepository.save(oVisitaMedicacion).getId();
     }
 
     public VisitaMedicacionEntity update(VisitaMedicacionEntity oVisitaMedicacion) {
+        oSessionService.isLogged();
         return oVisitaMedicacionRepository.save(oVisitaMedicacion);
     }
 
     public Long delete(Long id) {
+        oSessionService.isLogged();
         oVisitaMedicacionRepository.deleteById(id);
         return id;
     }
 
     public Page<VisitaMedicacionEntity> getPage(Pageable oPageable) {
+        oSessionService.isLogged();
         return oVisitaMedicacionRepository.findAll(oPageable);
     }
 
     public Long populate(Integer amount) {
+        oSessionService.isLogged();
         for (int i = 0; i < amount; i++) {
             VisitaMedicacionEntity oVisitaMedicacion = new VisitaMedicacionEntity();
             oVisitaMedicacion.setMedicacion(new MedicacionEntity("Medicacion " + i, "Descripcion " + i, new MedidaEntity("Kilogramo")));
@@ -52,6 +61,7 @@ public class VisitaMedicacionService {
 
     /* get by visitaid */
     public Page<VisitaMedicacionEntity> getByVisitaId(Long visitaId, Pageable pageable) {
+        oSessionService.isLogged();
         return oVisitaMedicacionRepository.findByVisitaId(visitaId, pageable);
     }
 }
